@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Fredoka
+   ========================================================= */
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("/fonts/fredoka-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   Tailwind Theme
+   ========================================================= */
+
+@theme {
+  /* Molten Lava Scale */
+  --color-molten-lava-50: #ffe5e5;
+  --color-molten-lava-100: #ffcccc;
+  --color-molten-lava-200: #ff9999;
+  --color-molten-lava-300: #ff6666;
+  --color-molten-lava-400: #ff3333;
+  --color-molten-lava-500: #ff0000;
+  --color-molten-lava-600: #cc0000;
+  --color-molten-lava-700: #990000;
+  --color-molten-lava-800: #660000;
+  --color-molten-lava-900: #330000;
+  --color-molten-lava-950: #240000;
+
+  /* Brick Red Scale */
+  --color-brick-red-50: #fde8e9;
+  --color-brick-red-100: #fbd0d3;
+  --color-brick-red-200: #f6a2a7;
+  --color-brick-red-300: #f2737b;
+  --color-brick-red-400: #ee4450;
+  --color-brick-red-500: #e91624;
+  --color-brick-red-600: #bb111d;
+  --color-brick-red-700: #8c0d15;
+  --color-brick-red-800: #5d090e;
+  --color-brick-red-900: #2f0407;
+  --color-brick-red-950: #210305;
+
+  /* Papaya Whip Scale */
+  --color-papaya-whip-50: #fef6e7;
+  --color-papaya-whip-100: #fdedce;
+  --color-papaya-whip-200: #fadb9e;
+  --color-papaya-whip-300: #f8ca6d;
+  --color-papaya-whip-400: #f6b83c;
+  --color-papaya-whip-500: #f4a60b;
+  --color-papaya-whip-600: #c38509;
+  --color-papaya-whip-700: #926407;
+  --color-papaya-whip-800: #614205;
+  --color-papaya-whip-900: #312102;
+  --color-papaya-whip-950: #221702;
+
+  /* Deep Space Blue Scale */
+  --color-deep-space-blue-50: #e5f6ff;
+  --color-deep-space-blue-100: #ccedff;
+  --color-deep-space-blue-200: #99dbff;
+  --color-deep-space-blue-300: #66c9ff;
+  --color-deep-space-blue-400: #33b8ff;
+  --color-deep-space-blue-500: #00a6ff;
+  --color-deep-space-blue-600: #0085cc;
+  --color-deep-space-blue-700: #006399;
+  --color-deep-space-blue-800: #004266;
+  --color-deep-space-blue-900: #002133;
+  --color-deep-space-blue-950: #001724;
+
+  /* Steel Blue Scale */
+  --color-steel-blue-50: #edf3f7;
+  --color-steel-blue-100: #dce8ef;
+  --color-steel-blue-200: #b8d1e0;
+  --color-steel-blue-300: #95b9d0;
+  --color-steel-blue-400: #71a2c1;
+  --color-steel-blue-500: #4e8bb1;
+  --color-steel-blue-600: #3e6f8e;
+  --color-steel-blue-700: #2f536a;
+  --color-steel-blue-800: #1f3847;
+  --color-steel-blue-900: #101c23;
+  --color-steel-blue-950: #0b1319;
+
+  /* Replacement Custom Accent */
+  --color-cyber-gold: #ffd60a;
+}
+
+/* =========================================================
+   1st-Pouf Token Contract Mapping
+   ========================================================= */
+
+:root {
+  /* Primary Font */
+  --font-pouf: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+
+  /* Puffy Spacing Metrics */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 20px;
+  --s6: 24px;
+  --s7: 32px;
+  --s8: 40px;
+
+  /* Cushion Attributes */
+  --lip: 8px;
+  --lip-row: 4px;
+
+  /* 1st-Pouf Semantic Theme Mappings */
+  --ink: var(--color-steel-blue-950);
+  --bg: var(--color-steel-blue-50);
+  --surface: #ffffff;
+  --muted: var(--color-steel-blue-400);
+
+  /* Intent Colors */
+  --purple: var(--color-deep-space-blue-400);
+  --blue: var(--color-steel-blue-500);
+  --pink: var(--color-molten-lava-400);
+  --mint: var(--color-papaya-whip-300);
+  --orange: var(--color-brick-red-400);
+  --yellow: var(--color-cyber-gold);
+
+  /* Contrast Inks */
+  --on-accent: var(--color-steel-blue-950);
+}
+
+/* =========================================================
+   Global Base
+   ========================================================= */
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--bg);
+
+  /* Make Fredoka the actual default font */
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Ensure inherited font is used by form elements too */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* =========================================================
+   3D / App Layout
+   ========================================================= */
+
+html,
+body {
+  overflow: hidden;
+}
+
+/* =========================================================
+   RU PEP Clay / Soft UI
+   ========================================================= */
+
+button {
+  border-radius: 9999px !important;
+  transition:
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+/* =========================================================
+   Soft Typography
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   Clay Button Treatment
+   ========================================================= */
+
+button {
+  box-shadow:
+    inset 0 2px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.12),
+    0 4px 0 rgba(0, 0, 0, 0.16),
+    0 10px 24px rgba(0, 0, 0, 0.20);
+}
+
+button:hover {
+  box-shadow:
+    inset 0 2px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.10),
+    0 5px 0 rgba(0, 0, 0, 0.14),
+    0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+button:active {
+  box-shadow:
+    inset 0 3px 5px rgba(0, 0, 0, 0.16),
+    0 2px 0 rgba(0, 0, 0, 0.12),
+    0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+/* =========================================================
+   Softer Body Text
+   ========================================================= */
+
+p {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   Selection
+   ========================================================= */
+
+::selection {
+  background: var(--color-deep-space-blue-400);
+  color: white;
+}
