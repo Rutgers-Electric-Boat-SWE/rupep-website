@@ -4,6 +4,8 @@ import { WorksWheel, type WorksWheelItem } from "./components/WorksWheel";
 import ImageRipple from "./components/ImageRipple";
 import { Button } from "./components/pouf/Button";
 import { ParticleField } from "./components/ui/particle-field";
+import MeetTheTeam from "./components/team/MeetTheTeam";
+import { useHashRoute } from "./hooks/useHashRoute";
 
 /* ---------------------------------------------------------
    RU PEP palette -> shadcn variables (used by the particles)
@@ -198,7 +200,7 @@ function CenterContent() {
   );
 }
 
-function App() {
+function HomePage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-steel-blue-950 text-white">
       {/* Soft blue glow behind everything */}
@@ -231,6 +233,16 @@ function App() {
       </div>
     </main>
   );
+}
+
+/* ---------------------------------------------------------
+   Page switching. There's no router, so the URL hash picks
+   the page: #team shows Meet the Team, and anything else
+   (including the wheel's #pep-* links) shows the home page.
+   --------------------------------------------------------- */
+function App() {
+  const hash = useHashRoute();
+  return hash === "#team" ? <MeetTheTeam /> : <HomePage />;
 }
 
 export default App;
