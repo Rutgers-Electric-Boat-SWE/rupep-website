@@ -1,9 +1,14 @@
 import { motion } from "motion/react";
 import type { Variants } from "motion/react";
-import PortholeCard from "./PortholeCard";
+import LifeRingCard from "./Liferingcard";
+import WaterBackground from "./Waterbackground";
+import BoatCursor from "./Boatcursor";
 import { TEAM_SECTIONS } from "./team-data";
 import type { Accent } from "./team-data";
-import { ParticleField } from "../ui/particle-field";
+
+// Sections whose members each have a distinct title (President, VP, ...).
+// Everywhere else the section heading already names the role, so the pill is hidden.
+const SECTIONS_WITH_ROLES = ["eboard"];
 
 // Each card fades and rises in, one after another, as its section scrolls into view.
 const sectionVariants: Variants = {
@@ -20,20 +25,25 @@ const cardVariants: Variants = {
  * The roster comes from ./team-data.ts.
  *
  * index.css sets `overflow: hidden` on html and body, so this page scrolls inside
- * its own container. The particle background sits outside that container, so it
+ * its own container. The water background sits outside that container, so it
  * stays fixed while the content scrolls.
  */
 export default function MeetTheTeam() {
   return (
-    <div className="relative h-full overflow-hidden bg-steel-blue-950 text-papaya-whip-50">
-      {/* Same backdrop as the home page: soft blue glow + particles */}
+    // pointer-fine: hides the native cursor (on every element) only on mouse/trackpad
+    // devices, where BoatCursor takes over. Touch screens are unaffected.
+    <div className="relative h-full overflow-hidden bg-deep-space-blue-950 text-papaya-whip-50 pointer-fine:cursor-none pointer-fine:[&_*]:cursor-none">
+      <BoatCursor />
+
+      {/* Interactive water surface: ripples follow the pointer and taps */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <WaterBackground />
+      </div>
+      {/* Soft light from above, so the water looks lit from the surface */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: "radial-gradient(60% 50% at 50% 30%, rgba(0,166,255,0.12), transparent 70%)" }}
+        style={{ background: "radial-gradient(70% 45% at 50% 0%, rgba(102,201,255,0.18), transparent 70%)" }}
       />
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <ParticleField count={600} speed={0.25} size={0.04} theme="auto" className="h-full w-full" />
-      </div>
 
       <main className="relative z-10 h-full overflow-y-auto">
         <div className="mx-auto flex max-w-6xl flex-col gap-(--s8) px-(--s4) py-(--s8)">
@@ -44,13 +54,12 @@ export default function MeetTheTeam() {
             </a>
             <h1
               className="m-0 text-5xl font-bold tracking-[-0.03em] text-papaya-whip-300 md:text-6xl"
-              style={{ filter: "drop-shadow(0 6px 18px rgba(248, 202, 109, 0.3))" }}
+              style={{ filter: "drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45))" }}
             >
               Meet the Team
             </h1>
             <p className="m-0 text-sm font-medium tracking-wide sm:text-base">
               <span className="text-brick-red-300">The crew behind RU PEP.</span>{" "}
-              <span className="text-papaya-whip-200">Hover or tap a porthole for a fun fact.</span>
             </p>
           </header>
 
@@ -69,7 +78,11 @@ export default function MeetTheTeam() {
               >
                 {section.members.map((member) => (
                   <motion.li key={`${section.id}-${member.name}-${member.role}`} variants={cardVariants}>
-                    <PortholeCard member={member} accent={section.accent} />
+                    <LifeRingCard
+                      member={member}
+                      accent={section.accent}
+                      showRole={SECTIONS_WITH_ROLES.includes(section.id)}
+                    />
                   </motion.li>
                 ))}
               </motion.ul>
