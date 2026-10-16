@@ -52,7 +52,7 @@ export const TEAM_SECTIONS: TeamSection[] = [
     title: "Electrical Leads",
     accent: "yellow",
     members: [
-      { name: "Krish Patel", role: "Electrical Lead", photo: "/team/photos/electrical lead.png", funFact: "I have used a CNC machine." },
+      { name: "Krish Patel", role: "Electrical Lead", photo: "/team/photos/e lead.png", funFact: "I have used a CNC machine." },
       { name: "Andy Heath", role: "Electrical Lead", photo:"/team/photos/electrical leads 2.png", funFact: "I’m a twin." },
       { name: "Praneeth Damarla", role: "Electrical Lead", photo: "/team/photos/electrical leads3.png", funFact: "I collect Pokemon cards." },
     ],
@@ -63,8 +63,8 @@ export const TEAM_SECTIONS: TeamSection[] = [
     accent: "purple",
     members: [
       { name: "Deepti Rao", role: "Software Lead", photo: "/team/photos/software l1.png", funFact: "I cannot swim but I can doggy paddle." },
-      { name: "Shoubhit Mukherjee", role: "Software Lead", photo: "/team/photos/software l2.png", funFact: "I 3D printed the custom chair stand in that image because I hated the noise the dorm chairs make when you lean back on them." },
-      { name: "Srinithin Ganesh", role: "Software Lead", photo: "/team/photos/software 3.png", funFact: "I’m left handed." },
+      { name: "Shoubhit Mukherjee", role: "Software Lead", photo: "/team/photos/softwarel2.png", funFact: "I 3D printed the custom chair stand in that image because I hated the noise the dorm chairs make when you lean back on them." },
+      { name: "Srinithin Ganesh", role: "Software Lead", photo: "/team/photos/s3.png", funFact: "I’m left handed." },
     ],
   },
   {
@@ -72,7 +72,7 @@ export const TEAM_SECTIONS: TeamSection[] = [
     title: "Business Leads",
     accent: "pink",
     members: [
-      { name: "Shalini Patel", role: "Business Lead", photo: "/team/photos/b1.png", funFact: "I have been on 14 Disney Cruises :)" },
+      { name: "Shalini Patel", role: "Business Lead", photo: "/team/photos/bus1.png", funFact: "I have been on 14 Disney Cruises :)" },
       { name: "Hannah Breunig", role: "Business Lead + Social Media", photo: "/team/photos/b2.png", funFact: "I have been to Bucee’s 6 times." },
       { name: "Ananya Jaising", role: "Business Lead", photo: "/team/photos/b3.png", funFact: "I studied abroad in London last semester." },
       { name: "Praneeta Kondragunta", role: "EGC Representative", photo: "/team/photos/b4.png", funFact: "I teach pilates at the Rutgers Rec!." },
