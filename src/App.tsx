@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-
+import {useState} from "react"
+import Content from "./Content"
 import { WorksWheel, type WorksWheelItem } from "./components/WorksWheel";
 import ImageRipple from "./components/ImageRipple";
 import { Button } from "./components/pouf/Button";
@@ -64,7 +65,7 @@ const WORKS: WorksWheelItem[] = [
   },
 ];
 
-function CenterContent() {
+function CenterContent({onGetContent}: {onGetContent: () => void}) {
   return (
     <div className="pointer-events-none flex flex-col items-center justify-center text-center">
       {/* Ripple Logo */}
@@ -173,21 +174,20 @@ function CenterContent() {
             }}
             className="rounded-full"
           >
-            <Button>
+            <Button onClick={onGetContent}>
               <span className="flex items-center gap-2 px-3">
                 <span>Get Started</span>
-
                 <motion.span
                   animate={{
                     x: [0, 3, 0],
                   }}
                   transition={{
-                    duration: 1.8,
+                  duration: 1.8,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                 >
-                  →
+                →
                 </motion.span>
               </span>
             </Button>
@@ -199,6 +199,20 @@ function CenterContent() {
 }
 
 function App() {
+  const [showContent, setShowContent] = useState(false);
+  if(showContent) {
+    return (
+      <main className="min-h-screen overflow-hidden bg-steel-blue-950 text-white">
+        <button
+        onClick={() => setShowContent(false)}
+        className ="fixed bottom-4 left-4 z-50 rounded bg-brick-red-400 px-4 py-2 font-semibold text-white hover:bg-brick-red-300"
+        >
+          ← Back to Home
+        </button>
+        <Content />
+      </main>
+    )
+  }
   return (
     <main className="relative min-h-screen overflow-hidden bg-steel-blue-950 text-white">
       {/* Soft blue glow behind everything */}
@@ -226,7 +240,7 @@ function App() {
         <WorksWheel
           items={WORKS}
           label="RU PEP"
-          center={<CenterContent />}
+          center={<CenterContent onGetContent={() => setShowContent(true)}/>}
         />
       </div>
     </main>

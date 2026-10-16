@@ -158,7 +158,8 @@ select {
 
 html,
 body {
-  overflow: hidden;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 /* =========================================================
