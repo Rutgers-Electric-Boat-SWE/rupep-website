@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
-
+import { motion, AnimatePresence } from "motion/react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import NewPage from "./NewPage";
 import { WorksWheel, type WorksWheelItem } from "./components/WorksWheel";
 import ImageRipple from "./components/ImageRipple";
 import { Button } from "./components/pouf/Button";
@@ -65,6 +66,7 @@ const WORKS: WorksWheelItem[] = [
 ];
 
 function CenterContent() {
+  const navigate = useNavigate();
   return (
     <div className="pointer-events-none flex flex-col items-center justify-center text-center">
       {/* Ripple Logo */}
@@ -158,6 +160,7 @@ function CenterContent() {
           className="pointer-events-auto mt-4"
         >
           <motion.div
+            onClick={() => navigate("/new-page")}
             whileHover={{
               y: -5,
               scale: 1.04,
@@ -198,7 +201,7 @@ function CenterContent() {
   );
 }
 
-function App() {
+function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-steel-blue-950 text-white">
       {/* Soft blue glow behind everything */}
@@ -233,4 +236,27 @@ function App() {
   );
 }
 
-export default App;
+function PageTransition({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -24 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function App() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/new-page" element={<PageTransition><NewPage /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
