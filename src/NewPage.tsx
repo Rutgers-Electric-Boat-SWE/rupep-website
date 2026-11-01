@@ -70,7 +70,7 @@ export default function NewPage() {
               Meeting locations will vary. Join our Discord for more info.
             </p>
             <ul className="mt-4 space-y-4 text-sm text-white/80">
-              <li> <span className="text-bold">General Body Meeting: Mon 7-8pm (Biweekly)</span>  </li>
+              <li> <span className="font-bold">General Body Meeting: Mon 7-8pm (Biweekly)</span>  </li>
               <li>Mechanical Subteam: Wed 6-7pm (Weekly) </li>
               <li>Software Subteam: Fri 6:30-7:30pm (Weekly) </li>
               <li>Electrical Subteam: Thu 7-8pm (Weekly)</li>
