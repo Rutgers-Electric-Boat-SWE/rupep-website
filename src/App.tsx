@@ -1,41 +1,48 @@
+
 import { motion, AnimatePresence } from "motion/react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Link } from "react-router-dom";
 import NewPage from "./NewPage";
+import Content from "./Content";
+import StatsSection from "./components/StatsSection";
 import { WorksWheel, type WorksWheelItem } from "./components/WorksWheel";
 import ImageRipple from "./components/ImageRipple";
 import { Button } from "./components/pouf/Button";
 import { ParticleField } from "./components/ui/particle-field";
 
 /* ---------------------------------------------------------
-   RU PEP palette -> shadcn variables (used by the particles)
-   Red + gold. Set on <html> before first render so the
-   theme hook sees them.
+   RU PEP palette -> shadcn variables
    --------------------------------------------------------- */
+
 const PEP_THEME: Record<string, string> = {
-  "--background": "#0b1319", // steel-blue-950
-  "--foreground": "#f8ca6d", // gold
-  "--primary": "#ee4450", // brick-red-400
+  "--background": "#0b1319",
+  "--foreground": "#f8ca6d",
+  "--primary": "#ee4450",
   "--primary-foreground": "#0b1319",
-  "--secondary": "#f8ca6d", // papaya-whip-300 (gold)
+  "--secondary": "#f8ca6d",
   "--secondary-foreground": "#0b1319",
-  "--accent": "#f6b83c", // papaya-whip-400 (deeper gold)
+  "--accent": "#f6b83c",
   "--accent-foreground": "#0b1319",
   "--muted": "#101c23",
-  "--muted-foreground": "#f2737b", // brick-red-300
-  "--chart-1": "#ee4450", // red
-  "--chart-2": "#f8ca6d", // gold
-  "--chart-3": "#e91624", // strong red
-  "--chart-4": "#f6b83c", // gold
-  "--chart-5": "#f2737b", // soft red
+  "--muted-foreground": "#f2737b",
+  "--chart-1": "#ee4450",
+  "--chart-2": "#f8ca6d",
+  "--chart-3": "#e91624",
+  "--chart-4": "#f6b83c",
+  "--chart-5": "#f2737b",
 };
 
 if (typeof document !== "undefined") {
   const root = document.documentElement;
   root.classList.add("dark");
+
   for (const [key, value] of Object.entries(PEP_THEME)) {
     root.style.setProperty(key, value);
   }
 }
+
+/* ---------------------------------------------------------
+   Works Wheel Items
+   --------------------------------------------------------- */
 
 const WORKS: WorksWheelItem[] = [
   {
@@ -65,8 +72,13 @@ const WORKS: WorksWheelItem[] = [
   },
 ];
 
+/* ---------------------------------------------------------
+   Center Content
+   --------------------------------------------------------- */
+
 function CenterContent() {
   const navigate = useNavigate();
+
   return (
     <div className="pointer-events-none flex flex-col items-center justify-center text-center">
       {/* Ripple Logo */}
@@ -90,7 +102,7 @@ function CenterContent() {
         <ImageRipple />
       </motion.div>
 
-      {/* Text + button group (shifted up) */}
+      {/* Text + Button Group */}
       <div className="flex -translate-y-5 flex-col items-center">
         {/* Title */}
         <motion.h1
@@ -109,8 +121,7 @@ function CenterContent() {
           }}
           className="-mt-10 text-4xl font-bold leading-[0.95] tracking-[-0.03em] text-papaya-whip-300 sm:text-5xl"
           style={{
-            filter:
-              "drop-shadow(0 6px 18px rgba(248, 202, 109, 0.3))",
+            filter: "drop-shadow(0 6px 18px rgba(248, 202, 109, 0.3))",
           }}
         >
           RU PEP
@@ -138,7 +149,7 @@ function CenterContent() {
           </span>
         </motion.p>
 
-        {/* CTA */}
+        {/* Get Started CTA */}
         <motion.div
           initial={{
             opacity: 0,
@@ -160,7 +171,7 @@ function CenterContent() {
           className="pointer-events-auto mt-4"
         >
           <motion.div
-            onClick={() => navigate("/new-page")}
+            onClick={() => navigate("/content")}
             whileHover={{
               y: -5,
               scale: 1.04,
@@ -174,7 +185,7 @@ function CenterContent() {
               stiffness: 400,
               damping: 18,
             }}
-            className="rounded-full"
+            className="cursor-pointer rounded-full"
           >
             <Button>
               <span className="flex items-center gap-2 px-3">
@@ -201,10 +212,14 @@ function CenterContent() {
   );
 }
 
+/* ---------------------------------------------------------
+   Home Page
+   --------------------------------------------------------- */
+
 function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-steel-blue-950 text-white">
-      {/* Soft blue glow behind everything */}
+      {/* Background Glow */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -213,7 +228,7 @@ function Home() {
         }}
       />
 
-      {/* Particle background */}
+      {/* Particle Background */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <ParticleField
           count={1200}
@@ -224,7 +239,7 @@ function Home() {
         />
       </div>
 
-      {/* Wheel sits on top */}
+      {/* Works Wheel */}
       <div className="relative z-10">
         <WorksWheel
           items={WORKS}
@@ -236,26 +251,86 @@ function Home() {
   );
 }
 
+/* ---------------------------------------------------------
+   Content Page
+   --------------------------------------------------------- */
+
+function ContentPage() {
+  return (
+    <main className="min-h-screen overflow-hidden bg-steel-blue-950 text-white">
+      {/* Hero Section - Includes Join Us Button */}
+      <Content />
+
+      {/* Statistics and Founding Timeline */}
+      <StatsSection />
+
+      {/* Back to Home */}
+      <Link
+        to="/"
+        className="fixed bottom-4 left-4 z-50 rounded bg-brick-red-400 px-4 py-2 font-semibold text-white transition-colors hover:bg-brick-red-300"
+      >
+        ← Back to Home
+      </Link>
+    </main>
+  );
+}
+
+/* ---------------------------------------------------------
+   Page Transition
+   --------------------------------------------------------- */
+
 function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.45,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {children}
     </motion.div>
   );
 }
 
+/* ---------------------------------------------------------
+   App Routes
+   --------------------------------------------------------- */
+
 export default function App() {
   const location = useLocation();
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-        <Route path="/new-page" element={<PageTransition><NewPage /></PageTransition>} />
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Home />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/new-page"
+          element={
+            <PageTransition>
+              <NewPage />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/content"
+          element={
+            <PageTransition>
+              <ContentPage />
+            </PageTransition>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
