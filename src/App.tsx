@@ -8,6 +8,7 @@ import { WorksWheel, type WorksWheelItem } from "./components/WorksWheel";
 import ImageRipple from "./components/ImageRipple";
 import { Button } from "./components/pouf/Button";
 import { ParticleField } from "./components/ui/particle-field";
+import MeetTheTeam from "./components/team/MeetTheTeam";
 
 /* ---------------------------------------------------------
    RU PEP palette -> shadcn variables
@@ -257,17 +258,22 @@ function Home() {
 
 function ContentPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-steel-blue-950 text-white">
-      {/* Hero Section - Includes Join Us Button */}
+    <main className="relative min-h-screen overflow-hidden bg-steel-blue-950 text-white">
+      {/* Who We Are */}
       <Content />
 
       {/* Statistics and Founding Timeline */}
       <StatsSection />
 
+      {/* Meet the Team */}
+      <div className="relative min-h-screen">
+        <MeetTheTeam />
+      </div>
+
       {/* Back to Home */}
       <Link
         to="/"
-        className="fixed bottom-4 left-4 z-50 rounded bg-brick-red-400 px-4 py-2 font-semibold text-white transition-colors hover:bg-brick-red-300"
+        className="fixed bottom-4 left-4 z-[100] rounded bg-brick-red-400 px-4 py-2 font-semibold text-white transition-colors hover:bg-brick-red-300"
       >
         ← Back to Home
       </Link>
@@ -331,6 +337,7 @@ export default function App() {
             </PageTransition>
           }
         />
+
       </Routes>
     </AnimatePresence>
   );
